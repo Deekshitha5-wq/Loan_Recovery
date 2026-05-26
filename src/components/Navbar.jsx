@@ -7,6 +7,7 @@ export default function Navbar() {
         <h1 className="text-3xl font-bold">
           Welcome Back Agent👋
         </h1>
+        <h1 className="text-red-500 text-3xl">NEW FRONTEND CHANGE</h1>
         <p className="text-gray-300">
           Loan Recovery Agent Dashboard
         </p>
