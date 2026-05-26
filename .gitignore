@@ -1,3 +1,8 @@
+ ai-dev
+venv/
+.env
+__pycache__/
+*.pyc
 # Logs
 logs
 *.log
@@ -25,3 +30,4 @@ dist-ssr
 __pycache__/
 .env
 venv/
+ main
