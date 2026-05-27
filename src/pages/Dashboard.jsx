@@ -8,6 +8,9 @@ import ActivityPanel from "../components/ActivityPanel";
 import Notifications from "../components/Notifications";
 import Settings from "../components/Settings";
 import React, { useState } from "react";
+import Customers from "../components/Customers";
+import Loans from "../components/Loans";
+import AnalyticsPage from "../components/AnalyticsPage";
 
 export default function Dashboard() {
   const [activePage, setActivePage] = useState("dashboard");
@@ -39,13 +42,15 @@ export default function Dashboard() {
   </>
 )}
 
-{activePage === "notifications" && (
-  <Notifications />
-)}
+{activePage === "notifications" && <Notifications />}
 
-{activePage === "settings" && (
-  <Settings />
-)}
+{activePage === "settings" && <Settings />}
+
+{activePage === "customers" && <Customers />}
+
+{activePage === "loans" && <Loans />}
+
+{activePage === "analytics" && <AnalyticsPage />}
         </div>
       </div>
   
