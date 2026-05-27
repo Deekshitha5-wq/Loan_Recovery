@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import Customers from "../components/Customers";
 import Loans from "../components/Loans";
 import AnalyticsPage from "../components/AnalyticsPage";
+import VoiceAgent from "../components/VoiceAgent"; 
 
 export default function Dashboard() {
   const [activePage, setActivePage] = useState("dashboard");
@@ -22,6 +23,7 @@ export default function Dashboard() {
 <div className="absolute bottom-0 right-0 w-72 h-72 bg-pink-500 opacity-20 blur-3xl rounded-full"></div>
 
       <Sidebar setActivePage={setActivePage} />
+      <VoiceAgent />
 
       <div className="flex-1 w-full p-6 overflow-y-auto">
         <Navbar />
