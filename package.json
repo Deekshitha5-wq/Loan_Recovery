@@ -10,10 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@tailwindcss/vite": "^4.3.0",
-=======
->>>>>>> 080289d45e6182a6860147a2d173a6512eb25d34
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.16.0",
     "react": "^19.2.6",
