@@ -1,26 +1,38 @@
-import { motion } from "framer-motion";
-
-const cards = [
-  { title: "Total Loans", value: "1,250" },
-  { title: "Pending Loans", value: "320" },
-  { title: "Recovered Loans", value: "930" },
-  { title: "Recovery Rate", value: "74%" },
+const data = [
+  {
+    title: "Total Loans",
+    value: "1,250",
+  },
+  {
+    title: "Pending Loans",
+    value: "320",
+  },
+  {
+    title: "Recovered Loans",
+    value: "930",
+  },
+  {
+    title: "Recovery Rate",
+    value: "74%",
+  },
 ];
 
 export default function OverviewCards() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {cards.map((card, index) => (
-        <motion.div
-          whileHover={{ scale: 1.05 }}
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      {data.map((card, index) => (
+        <div
           key={index}
-          className="glass glow p-6 rounded-2xl card-hover"
+          className="bg-[#1F2937] p-6 rounded-2xl"
         >
-          <h2 className="text-gray-300">{card.title}</h2>
-          <h1 className="text-4xl font-bold mt-2">
+          <h2 className="text-gray-400">
+            {card.title}
+          </h2>
+
+          <p className="text-4xl font-bold mt-3">
             {card.value}
-          </h1>
-        </motion.div>
+          </p>
+        </div>
       ))}
     </div>
   );

@@ -7,16 +7,16 @@ const actions = [
 
 export default function QuickActions() {
   return (
-    <div className="glass p-6 rounded-2xl">
-      <h2 className="text-2xl font-bold mb-6">
+    <div className="bg-[#1F2937] p-6 rounded-2xl">
+      <h1 className="text-2xl font-bold mb-6">
         Quick Actions
-      </h2>
+      </h1>
 
       <div className="grid grid-cols-2 gap-4">
         {actions.map((action, index) => (
           <button
             key={index}
-            className="bg-pink-600 hover:bg-pink-700 transition p-4 rounded-xl glow"
+            className="bg-pink-500 p-4 rounded-xl hover:scale-105 transition"
           >
             {action}
           </button>

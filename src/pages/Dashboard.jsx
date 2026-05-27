@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import OverviewCards from "../components/OverviewCards";
@@ -5,56 +7,95 @@ import LoanStatus from "../components/LoanStatus";
 import QuickActions from "../components/QuickActions";
 import Analytics from "../components/Analytics";
 import ActivityPanel from "../components/ActivityPanel";
+
 import Notifications from "../components/Notifications";
 import Settings from "../components/Settings";
-import React, { useState } from "react";
 import Customers from "../components/Customers";
 import Loans from "../components/Loans";
 import AnalyticsPage from "../components/AnalyticsPage";
-import VoiceAgent from "../components/VoiceAgent"; 
+
+import VoiceAgent from "../components/VoiceAgent";
 
 export default function Dashboard() {
   const [activePage, setActivePage] = useState("dashboard");
+
   return (
-    <div className="flex min-h-screen w-full bg-[#070B1A] text-white relative overflow-hidden">
+    <div className="flex min-h-screen bg-[#060816] text-white">
 
-    <div className="absolute top-0 left-0 w-72 h-72 bg-purple-500 opacity-20 blur-3xl rounded-full"></div>
+      {/* SIDEBAR */}
+      <div className="w-64 flex-shrink-0">
+        <Sidebar setActivePage={setActivePage} />
+      </div>
 
-<div className="absolute bottom-0 right-0 w-72 h-72 bg-pink-500 opacity-20 blur-3xl rounded-full"></div>
+      {/* MAIN CONTENT */}
+      <div className="flex-1 p-6 overflow-y-auto relative">
 
-      <Sidebar setActivePage={setActivePage} />
-      <VoiceAgent />
-
-      <div className="flex-1 w-full p-6 overflow-y-auto">
+        {/* NAVBAR */}
         <Navbar />
 
-{activePage === "dashboard" && (
-  <>
-    <OverviewCards />
+        {/* FLOATING VOICE AGENT */}
+        <div className="fixed top-24 right-4 z-50 scale-75 origin-top-right">
+  <VoiceAgent />
+</div>
 
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-      <LoanStatus />
-      <QuickActions />
-    </div>
+        {/* DASHBOARD */}
+        {activePage === "dashboard" && (
+          <div className="pr-[360px]">
 
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-      <Analytics />
-      <ActivityPanel />
-    </div>
-  </>
-)}
+            {/* OVERVIEW CARDS */}
+            <OverviewCards />
 
-{activePage === "notifications" && <Notifications />}
+            {/* LOAN STATUS + QUICK ACTIONS */}
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-6">
+              <LoanStatus />
+              <QuickActions />
+            </div>
 
-{activePage === "settings" && <Settings />}
+            {/* ANALYTICS + ACTIVITY */}
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-6">
+              <Analytics />
+              <ActivityPanel />
+            </div>
 
-{activePage === "customers" && <Customers />}
+          </div>
+        )}
 
-{activePage === "loans" && <Loans />}
+        {/* CUSTOMERS PAGE */}
+        {activePage === "customers" && (
+          <div className="pr-[360px]">
+            <Customers />
+          </div>
+        )}
 
-{activePage === "analytics" && <AnalyticsPage />}
-        </div>
+        {/* LOANS PAGE */}
+        {activePage === "loans" && (
+          <div className="pr-[360px]">
+            <Loans />
+          </div>
+        )}
+
+        {/* ANALYTICS PAGE */}
+        {activePage === "analytics" && (
+          <div className="pr-[360px]">
+            <AnalyticsPage />
+          </div>
+        )}
+
+        {/* NOTIFICATIONS PAGE */}
+        {activePage === "notifications" && (
+          <div className="pr-[360px]">
+            <Notifications />
+          </div>
+        )}
+
+        {/* SETTINGS PAGE */}
+        {activePage === "settings" && (
+          <div className="pr-[360px]">
+            <Settings />
+          </div>
+        )}
+
       </div>
-  
+    </div>
   );
 }

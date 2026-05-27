@@ -1,63 +1,23 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Bell, CheckCircle, AlertTriangle } from "lucide-react";
-
-const notifications = [
-  {
-    id: 1,
-    title: "Payment Reminder Sent",
-    desc: "Reminder sent to Rahul Sharma",
-    icon: <Bell size={20} />,
-  },
-  {
-    id: 2,
-    title: "Loan Successfully Recovered",
-    desc: "₹50,000 recovered today",
-    icon: <CheckCircle size={20} />,
-  },
-  {
-    id: 3,
-    title: "High Risk Account",
-    desc: "Customer overdue by 90 days",
-    icon: <AlertTriangle size={20} />,
-  },
-];
-
-const Notifications = () => {
+export default function Notifications() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-white/10 backdrop-blur-lg p-6 rounded-3xl shadow-xl border border-white/10"
-    >
-      <h2 className="text-3xl font-bold text-white mb-6">
+    <div className="bg-[#1F2937] p-6 rounded-2xl">
+      <h1 className="text-3xl font-bold mb-6">
         Notifications
-      </h2>
+      </h1>
 
       <div className="space-y-4">
-        {notifications.map((item) => (
-          <div
-            key={item.id}
-            className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl hover:bg-white/10 transition"
-          >
-            <div className="text-pink-400">
-              {item.icon}
-            </div>
+        <div className="bg-[#111827] p-4 rounded-xl">
+          EMI reminder sent successfully
+        </div>
 
-            <div>
-              <h3 className="text-white font-semibold">
-                {item.title}
-              </h3>
+        <div className="bg-[#111827] p-4 rounded-xl">
+          New customer added
+        </div>
 
-              <p className="text-gray-300 text-sm">
-                {item.desc}
-              </p>
-            </div>
-          </div>
-        ))}
+        <div className="bg-[#111827] p-4 rounded-xl">
+          Recovery target achieved
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
-};
-
-export default Notifications;
+}

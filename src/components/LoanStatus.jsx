@@ -1,17 +1,16 @@
 export default function LoanStatus() {
   return (
-    <div className="glass p-6 rounded-2xl">
-      <h2 className="text-2xl font-bold mb-4">
+    <div className="bg-[#1F2937] p-6 rounded-2xl">
+      <h1 className="text-2xl font-bold mb-6">
         Loan Status
-      </h2>
+      </h1>
 
       <input
-        type="text"
         placeholder="Enter Loan ID"
-        className="w-full p-3 rounded-xl bg-black/20 outline-none"
+        className="w-full p-3 rounded-xl bg-[#111827] outline-none"
       />
 
-      <button className="mt-4 w-full bg-purple-600 hover:bg-purple-700 transition p-3 rounded-xl glow">
+      <button className="w-full mt-4 bg-pink-500 p-3 rounded-xl">
         Check Status
       </button>
 

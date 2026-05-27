@@ -4,28 +4,25 @@ export default function Navbar() {
   return (
     <div className="flex justify-between items-center mb-8">
       <div>
-        <h1 className="text-3xl font-bold">
-          Loan Recovery Agent Dashboard
+        <h1 className="text-4xl font-bold">
+          Welcome Back Agent 👋
         </h1>
-        <p className="text-gray-300">
-          Welcome back,Agent! Here is your Dashboard
+
+        <p className="text-gray-400 mt-2">
+          Loan Recovery Dashboard
         </p>
       </div>
 
-      <div className="flex items-center gap-4">
-
-        <div className="glass px-4 py-2 rounded-xl flex items-center gap-2">
+      <div className="flex items-center gap-6">
+        <div className="flex items-center bg-[#1F2937] px-4 py-2 rounded-xl">
           <FaSearch />
           <input
-            type="text"
+            className="bg-transparent outline-none ml-2"
             placeholder="Search..."
-            className="bg-transparent outline-none"
           />
         </div>
 
-        <div className="glass p-3 rounded-xl">
-          <FaBell />
-        </div>
+        <FaBell size={22} />
 
         <img
           src="https://i.pravatar.cc/40"
