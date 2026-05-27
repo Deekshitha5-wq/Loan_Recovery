@@ -5,11 +5,10 @@ export default function Navbar() {
     <div className="flex justify-between items-center mb-8">
       <div>
         <h1 className="text-3xl font-bold">
-          Welcome Back Agent👋
-        </h1>
-        <h1 className="text-red-500 text-3xl">NEW FRONTEND CHANGE</h1>
-        <p className="text-gray-300">
           Loan Recovery Agent Dashboard
+        </h1>
+        <p className="text-gray-300">
+          Welcome back,Agent! Here is your Dashboard
         </p>
       </div>
 
