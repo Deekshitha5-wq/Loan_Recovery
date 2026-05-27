@@ -27,19 +27,7 @@ export default function Sidebar({ setActivePage }) {
         {menu.map((item, index) => (
   <div
     key={index}
-    onClick={() => {
-      if (item.name === "Dashboard") {
-        setActivePage("dashboard");
-      }
-
-      if (item.name === "Notifications") {
-        setActivePage("notifications");
-      }
-
-      if (item.name === "Settings") {
-        setActivePage("settings");
-      }
-    }}
+    onClick={() => setActivePage(item.name.toLowerCase())}
     className="flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-white/10 transition-all duration-300"
   >
     <span className="text-xl">{item.icon}</span>
