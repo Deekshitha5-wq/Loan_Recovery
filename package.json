@@ -1,15 +1,6 @@
 {
-  "name": "frontend",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
   "dependencies": {
+    "lucide-react": "^1.16.0"
     "@tailwindcss/vite": "^4.3.0",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.16.0",
