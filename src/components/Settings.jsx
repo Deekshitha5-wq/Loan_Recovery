@@ -1,4 +1,13 @@
-export default function Settings() {
+import { useState } from "react";
+
+export default function Settings({
+  darkMode,
+  setDarkMode,
+}) {
+  const [notifications, setNotifications] = useState(true);
+
+  const [language, setLanguage] = useState("English");
+
   return (
     <div className="bg-[#1F2937] p-6 rounded-2xl">
       <h1 className="text-3xl font-bold mb-6">
@@ -6,17 +15,38 @@ export default function Settings() {
       </h1>
 
       <div className="space-y-6">
-        <div className="bg-[#111827] p-4 rounded-xl">
-          Dark Mode: ON
-        </div>
 
-        <div className="bg-[#111827] p-4 rounded-xl">
-          Notifications Enabled
-        </div>
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="w-full bg-[#111827] p-4 rounded-xl text-left"
+        >
+          Dark Mode: {darkMode ? "ON" : "OFF"}
+        </button>
 
-        <div className="bg-[#111827] p-4 rounded-xl">
-          Language: English
-        </div>
+        <button
+          onClick={() =>
+            setNotifications(!notifications)
+          }
+          className="w-full bg-[#111827] p-4 rounded-xl text-left"
+        >
+          Notifications:
+          {notifications
+            ? " Enabled"
+            : " Disabled"}
+        </button>
+
+        <select
+          value={language}
+          onChange={(e) =>
+            setLanguage(e.target.value)
+          }
+          className="w-full bg-[#111827] p-4 rounded-xl outline-none"
+        >
+          <option>English</option>
+          <option>Hindi</option>
+          <option>Telugu</option>
+        </select>
+
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../api";
 
 export default function Login() {
+
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -10,6 +12,7 @@ export default function Login() {
   const [errors, setErrors] = useState({});
 
   const validate = () => {
+
     let newErrors = {};
 
     // EMAIL VALIDATION
@@ -28,11 +31,19 @@ export default function Login() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
+
     e.preventDefault();
 
     if (validate()) {
-      navigate("/dashboard");
+
+      const data = await loginUser(email, password);
+
+      if (data.message === "Login successful") {
+        navigate("/dashboard");
+      } else {
+        alert("Invalid Login");
+      }
     }
   };
 
@@ -53,6 +64,7 @@ export default function Login() {
 
           {/* EMAIL */}
           <div>
+
             <label className="block mb-2 text-lg">
               Email
             </label>
@@ -70,10 +82,12 @@ export default function Login() {
                 {errors.email}
               </p>
             )}
+
           </div>
 
           {/* PASSWORD */}
           <div>
+
             <label className="block mb-2 text-lg">
               Password
             </label>
@@ -91,6 +105,7 @@ export default function Login() {
                 {errors.password}
               </p>
             )}
+
           </div>
 
           <button
