@@ -13,6 +13,7 @@ import Settings from "../components/Settings";
 import Customers from "../components/Customers";
 import Loans from "../components/Loans";
 import AnalyticsPage from "../components/AnalyticsPage";
+import AIVoiceCall from "../components/AIVoiceCall";
 
 export default function Dashboard() {
   const [activePage, setActivePage] = useState("dashboard");
@@ -51,6 +52,7 @@ export default function Dashboard() {
         {activePage === "loans" && <Loans />}
         {activePage === "analytics" && <AnalyticsPage />}
         {activePage === "notifications" && <Notifications />}
+        {activePage === "ai voice call" && <AIVoiceCall />}
 
         {activePage === "settings" && (
           <Settings darkMode={darkMode} setDarkMode={setDarkMode} />
