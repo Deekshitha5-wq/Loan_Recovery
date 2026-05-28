@@ -10,6 +10,7 @@ from routes.voice_routes import router as voice_router
 from routes.settings_routes import router as settings_router
 from routes.action_routes import router as action_router
 
+
 app = FastAPI()
 
 app.add_middleware(
