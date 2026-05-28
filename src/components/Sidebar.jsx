@@ -3,6 +3,7 @@ import {
   FaMoneyBill,
   FaUsers,
   FaChartPie,
+  FaPhoneAlt,
   FaBell,
   FaCog,
 } from "react-icons/fa";
@@ -11,6 +12,7 @@ const menu = [
   { icon: <FaHome />, name: "Dashboard" },
   { icon: <FaMoneyBill />, name: "Loans" },
   { icon: <FaUsers />, name: "Customers" },
+  { icon: <FaPhoneAlt />, name: "AI Voice Call" },
   { icon: <FaChartPie />, name: "Analytics" },
   { icon: <FaBell />, name: "Notifications" },
   { icon: <FaCog />, name: "Settings" },
