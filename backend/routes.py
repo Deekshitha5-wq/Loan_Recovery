@@ -1,9 +1,11 @@
 from fastapi import APIRouter, HTTPException
+
 from backend.schemas import (
     StartAgentRequest,
     ProcessInputRequest,
     LogRequest,
 )
+
 from backend.services import (
     start_agent_service,
     process_input_service,
@@ -13,6 +15,9 @@ from backend.services import (
     get_call_logs_service,
     get_status_service,
 )
+
+from ai_engine.analytics_engine import generate_analytics
+
 
 router = APIRouter()
 
@@ -76,5 +81,17 @@ def get_call_logs():
 def get_status():
     try:
         return get_status_service()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# -----------------------------
+# AI Analytics Integration
+# -----------------------------
+
+@router.get("/analytics")
+def analytics():
+    try:
+        return generate_analytics()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
