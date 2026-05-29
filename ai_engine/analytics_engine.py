@@ -62,6 +62,29 @@ def get_analytics():
 
 
 
+def generate_analytics():
+
+    data = get_analytics()
+
+    return {
+
+        "total_interactions": data["total_interactions"],
+
+        "high_risk_cases": data["high_risk_cases"],
+
+        "medium_risk_cases": data["medium_risk_cases"],
+
+        "low_risk_cases": data["low_risk_cases"],
+
+        "payment_discussions": data["payment_discussions"],
+
+        "follow_up_requests": data["follow_up_requests"],
+
+        "financial_difficulty_cases": data["financial_difficulty_cases"]
+    }
+
+
+
 # Test section
 if __name__ == "__main__":
 
@@ -74,4 +97,4 @@ if __name__ == "__main__":
 
     print("\nAnalytics Summary:\n")
 
-    print(get_analytics())
+    print(generate_analytics())
