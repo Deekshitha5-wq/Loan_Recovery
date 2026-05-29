@@ -1,13 +1,10 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body{
   margin:0;
   font-family: 'Poppins', sans-serif;
   background:#060816;
   color:white;
-}
-
-.glass{
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(18px);
 }

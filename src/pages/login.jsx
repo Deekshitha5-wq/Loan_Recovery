@@ -1,12 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import {
-  FaEnvelope,
-  FaLock,
-  FaEye,
-  FaEyeSlash,
-} from "react-icons/fa";
+import { loginUser } from "../api";
 
 export default function Login() {
 
@@ -15,38 +9,21 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [showPassword, setShowPassword] = useState(false);
-
   const [errors, setErrors] = useState({});
 
   const validate = () => {
 
     let newErrors = {};
 
-    // Email validation
-    if (!email.includes("@")) {
-      newErrors.email = "Enter valid email";
+    // EMAIL VALIDATION
+    if (!email.includes("@") || !email.includes(".")) {
+      newErrors.email = "Enter a valid email";
     }
 
-    // Password validation
+    // PASSWORD VALIDATION
     if (password.length < 8) {
       newErrors.password =
-        "Password must be at least 8 characters";
-    }
-
-    if (!/[A-Z]/.test(password)) {
-      newErrors.password =
-        "Must contain uppercase letter";
-    }
-
-    if (!/[0-9]/.test(password)) {
-      newErrors.password =
-        "Must contain number";
-    }
-
-    if (!/[!@#$%^&*]/.test(password)) {
-      newErrors.password =
-        "Must contain special character";
+        "Password must contain at least 8 characters";
     }
 
     setErrors(newErrors);
@@ -54,145 +31,92 @@ export default function Login() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleLogin = () => {
+  const handleLogin = async (e) => {
+
+    e.preventDefault();
 
     if (validate()) {
 
-      // Demo Login
-      if (
-        email === "admin@gmail.com" &&
-        password === "Admin@123"
-      ) {
+      const data = await loginUser(email, password);
+
+      if (data.message === "Login successful") {
         navigate("/dashboard");
       } else {
-        alert("Invalid Credentials");
+        alert("Invalid Login");
       }
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center overflow-hidden relative bg-[#060816]">
+    <div className="min-h-screen flex items-center justify-center bg-[#060816] text-white px-6">
 
-      {/* Background Glow */}
-      <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-purple-600 rounded-full blur-[140px] opacity-30"></div>
+      <div className="w-full max-w-md bg-white/10 backdrop-blur-xl p-10 rounded-3xl border border-white/10">
 
-      <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px] bg-pink-600 rounded-full blur-[140px] opacity-30"></div>
-
-      {/* Login Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-[420px] glass p-10 rounded-3xl border border-white/10 shadow-2xl"
-      >
-
-        {/* Logo */}
-        <h1 className="text-5xl font-bold text-center mb-3">
-          <span className="text-purple-400">Loan</span>
-          <span className="text-pink-400">AI</span>
+        <h1 className="text-5xl font-bold text-center mb-3 text-purple-400">
+          LoanAI
         </h1>
 
-        <p className="text-center text-gray-400 mb-10">
-          AI Powered Loan Recovery Agent
+        <p className="text-center text-gray-300 mb-10">
+          Loan Recovery Agent Login
         </p>
 
-        {/* EMAIL */}
-        <div className="mb-6">
+        <form onSubmit={handleLogin} className="space-y-6">
 
-          <label className="text-gray-300 mb-2 block">
-            Email
-          </label>
+          {/* EMAIL */}
+          <div>
 
-          <div className="flex items-center bg-white/10 p-4 rounded-xl border border-white/10">
-
-            <FaEnvelope className="text-purple-400" />
+            <label className="block mb-2 text-lg">
+              Email
+            </label>
 
             <input
               type="email"
-              placeholder="example@gmail.com"
-              className="bg-transparent outline-none ml-3 w-full text-white"
+              placeholder="Enter your email"
               value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-4 rounded-2xl bg-[#1B1E3A] outline-none"
             />
+
+            {errors.email && (
+              <p className="text-red-400 mt-2">
+                {errors.email}
+              </p>
+            )}
+
           </div>
 
-          {errors.email && (
-            <p className="text-red-400 mt-2 text-sm">
-              {errors.email}
-            </p>
-          )}
-        </div>
+          {/* PASSWORD */}
+          <div>
 
-        {/* PASSWORD */}
-        <div className="mb-6">
-
-          <label className="text-gray-300 mb-2 block">
-            Password
-          </label>
-
-          <div className="flex items-center bg-white/10 p-4 rounded-xl border border-white/10">
-
-            <FaLock className="text-pink-400" />
+            <label className="block mb-2 text-lg">
+              Password
+            </label>
 
             <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter Password"
-              className="bg-transparent outline-none ml-3 w-full text-white"
+              type="password"
+              placeholder="Enter password"
               value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-4 rounded-2xl bg-[#1B1E3A] outline-none"
             />
 
-            <button
-              onClick={() =>
-                setShowPassword(!showPassword)
-              }
-            >
-              {showPassword ? (
-                <FaEyeSlash />
-              ) : (
-                <FaEye />
-              )}
-            </button>
+            {errors.password && (
+              <p className="text-red-400 mt-2">
+                {errors.password}
+              </p>
+            )}
+
           </div>
 
-          {errors.password && (
-            <p className="text-red-400 mt-2 text-sm">
-              {errors.password}
-            </p>
-          )}
+          <button
+            type="submit"
+            className="w-full py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 text-xl font-bold hover:scale-105 transition"
+          >
+            Login
+          </button>
 
-          {/* Password Rules */}
-          <div className="mt-4 text-sm text-gray-400 space-y-1">
-            <p>✔ Minimum 8 characters</p>
-            <p>✔ One uppercase letter</p>
-            <p>✔ One number</p>
-            <p>✔ One special character</p>
-          </div>
-        </div>
-
-        {/* Login Button */}
-        <motion.button
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handleLogin}
-          className="w-full p-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 font-semibold text-lg shadow-lg"
-        >
-          Login
-        </motion.button>
-
-        {/* Demo Credentials */}
-        <div className="mt-6 text-center text-gray-400 text-sm">
-          Demo:
-          <br />
-          admin@gmail.com
-          <br />
-          Admin@123
-        </div>
-
-      </motion.div>
+        </form>
+      </div>
     </div>
   );
 }

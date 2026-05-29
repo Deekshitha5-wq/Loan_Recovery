@@ -1,25 +1,81 @@
-export default function LoanStatus() {
+import React, { useState } from "react";
+
+const LoanStatus = () => {
+  const [loanId, setLoanId] = useState("");
+  const [loan, setLoan] = useState(null);
+
+  const checkLoanStatus = async () => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/loan/${loanId}`
+      );
+
+      const data = await response.json();
+
+      setLoan(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="glass p-6 rounded-2xl">
-      <h2 className="text-2xl font-bold mb-4">
-        Loan Status
-      </h2>
+    <div style={{ padding: "20px", color: "white" }}>
+      <h2>Loan Status</h2>
 
       <input
         type="text"
         placeholder="Enter Loan ID"
-        className="w-full p-3 rounded-xl bg-black/20 outline-none"
+        value={loanId}
+        onChange={(e) => setLoanId(e.target.value)}
+        style={{
+          padding: "10px",
+          width: "250px",
+          marginRight: "10px",
+          color: "black",
+          backgroundColor: "white",
+        }}
       />
 
-      <button className="mt-4 w-full bg-purple-600 hover:bg-purple-700 transition p-3 rounded-xl glow">
+      <button
+        onClick={checkLoanStatus}
+        style={{
+          padding: "10px 20px",
+          cursor: "pointer",
+        }}
+      >
         Check Status
       </button>
 
-      <div className="mt-6 space-y-2">
-        <p>Name: John Doe</p>
-        <p>Loan Amount: ₹5,00,000</p>
-        <p>Status: Pending</p>
-      </div>
+      {loan && (
+        <div
+          style={{
+            marginTop: "20px",
+            background: "#1e293b",
+            padding: "20px",
+            borderRadius: "10px",
+          }}
+        >
+          <h3>Loan Details</h3>
+
+          <p>
+            <strong>Loan ID:</strong> {loan.id}
+          </p>
+
+          <p>
+            <strong>Customer:</strong> {loan.customer}
+          </p>
+
+          <p>
+            <strong>Amount:</strong> ₹{loan.amount}
+          </p>
+
+          <p>
+            <strong>Status:</strong> {loan.status}
+          </p>
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default LoanStatus;
