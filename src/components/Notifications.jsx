@@ -15,7 +15,7 @@ export default function Notifications() {
   };
 
   return (
-    <div className="bg-[#1F2937] p-6 rounded-2xl">
+    <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
 
       <h1 className="text-3xl font-bold mb-6">
         Notifications
@@ -26,7 +26,7 @@ export default function Notifications() {
         {notifications.map((item) => (
           <div
             key={item.id}
-            className="bg-[#111827] p-4 rounded-xl"
+            className="bg-white shadow-md border border-gray-200 p-4 rounded-lg"
           >
             {item.message}
           </div>

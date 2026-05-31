@@ -30,10 +30,10 @@ export async function saveQuickAction(action, loanId, note) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      action,
-      loan_id: loanId,
-      note,
-    }),
+    action_type: action,
+    loan_id: loanId,
+    note: note,
+}),
   });
 
   return res.json();

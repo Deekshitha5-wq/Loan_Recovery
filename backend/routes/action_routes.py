@@ -40,6 +40,15 @@ def save_quick_action(data: QuickActionData):
         status_message = "Action completed successfully"
 
     with engine.connect() as connection:
+        loan = connection.execute(
+            text("SELECT * FROM loans WHERE id = :loan_id"),
+            {"loan_id": int(data.loan_id)}).fetchone()
+
+        if not loan:
+            raise HTTPException(
+                status_code=404,
+                detail="Loan ID not found"
+            )
         connection.execute(
             text("""
                 INSERT INTO quick_actions

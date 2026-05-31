@@ -23,13 +23,13 @@ export default function OverviewCards() {
       {data.map((card, index) => (
         <div
           key={index}
-          className="bg-[#1F2937] p-6 rounded-2xl"
+          className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 text-gray-200"
         >
-          <h2 className="text-gray-400">
+          <h2 className="text-gray-500">
             {card.title}
           </h2>
 
-          <p className="text-4xl font-bold mt-3">
+          <p className="text-4xl font-bold mt-3 text-gray-900">
             {card.value}
           </p>
         </div>
