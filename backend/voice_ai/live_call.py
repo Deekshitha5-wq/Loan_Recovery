@@ -1,7 +1,7 @@
-from speech_to_text import convert_speech_to_text
-from call_flow import generate_response
-from text_to_speech import speak_text
-from utils import save_log
+from backend.voice_ai.speech_to_text import convert_speech_to_text
+from backend.voice_ai.call_flow import generate_response
+from backend.voice_ai.text_to_speech import speak_text
+from backend.voice_ai.utils import save_log
 
 print("===================================")
 print(" AI Loan Recovery Agent Started ")
