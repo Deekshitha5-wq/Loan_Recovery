@@ -25,7 +25,7 @@ export default function Customers() {
         {customers.map((customer) => (
           <div
             key={customer.id}
-            className="bg-[#1F2937] p-6 rounded-2xl"
+            className="bg-white shadow-md border border-gray-200 p-6 rounded-2xl"
           >
             <h2 className="text-2xl font-bold">
               {customer.name}

@@ -9,7 +9,7 @@ export default function Settings({
   const [language, setLanguage] = useState("English");
 
   return (
-    <div className="bg-[#1F2937] p-6 rounded-2xl">
+    <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-200">
       <h1 className="text-3xl font-bold mb-6">
         Settings
       </h1>
@@ -18,7 +18,7 @@ export default function Settings({
 
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className="w-full bg-[#111827] p-4 rounded-xl text-left"
+          className="w-full bg-white shadow-md border border-gray-200 p-4 rounded-xl text-left"
         >
           Dark Mode: {darkMode ? "ON" : "OFF"}
         </button>
@@ -27,7 +27,7 @@ export default function Settings({
           onClick={() =>
             setNotifications(!notifications)
           }
-          className="w-full bg-[#111827] p-4 rounded-xl text-left"
+          className="w-full bg-white shadow-md border border-gray-200 p-4 rounded-xl text-left"
         >
           Notifications:
           {notifications
@@ -40,7 +40,7 @@ export default function Settings({
           onChange={(e) =>
             setLanguage(e.target.value)
           }
-          className="w-full bg-[#111827] p-4 rounded-xl outline-none"
+          className="w-full bg-white shadow-md border border-gray-200 p-4 rounded-xl outline-none"
         >
           <option>English</option>
           <option>Hindi</option>

@@ -1,22 +1,24 @@
 from fastapi import APIRouter
+from sqlalchemy import text
+from database.connection import engine
 
 router = APIRouter()
 
 
 @router.get("/customers")
 def get_customers():
+    with engine.connect() as connection:
+        result = connection.execute(
+            text("""
+                SELECT id, name, phone, status
+                FROM customers
+                ORDER BY id
+            """)
+        )
 
-    return [
-        {
-            "id": 1,
-            "name": "Rahul Sharma",
-            "phone": "9876543210",
-            "status": "Pending"
-        },
-        {
-            "id": 2,
-            "name": "Priya Verma",
-            "phone": "9876501234",
-            "status": "Paid"
-        }
-    ]
+        customers = []
+
+        for row in result:
+            customers.append(dict(row._mapping))
+
+        return customers

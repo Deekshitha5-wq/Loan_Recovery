@@ -17,12 +17,12 @@ import AIVoiceCall from "../components/AIVoiceCall";
 
 export default function Dashboard() {
   const [activePage, setActivePage] = useState("dashboard");
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   return (
     <div
       className={`flex min-h-screen ${
-        darkMode ? "bg-[#060816] text-white" : "bg-white text-black"
+        darkMode ? "bg-[#060816] text-white" : "bg-gray-100 text-gray-900"
       }`}
     >
       <div className="w-64 flex-shrink-0">

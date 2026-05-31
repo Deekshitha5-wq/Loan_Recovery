@@ -1,39 +1,53 @@
 from fastapi import APIRouter, HTTPException
+from sqlalchemy import text
+from database.connection import engine
 
 router = APIRouter()
 
-loans = [
-    {
-        "id": 1,
-        "customer": "Rahul Sharma",
-        "amount": 500000,
-        "status": "Pending"
-    },
-    {
-        "id": 2,
-        "customer": "Priya Verma",
-        "amount": 300000,
-        "status": "Paid"
-    },
-    {
-        "id": 3,
-        "customer": "Arjun Rao",
-        "amount": 700000,
-        "status": "Overdue"
-    }
-]
+
 @router.get("/loans")
 def get_loans():
-    return loans
+    with engine.connect() as connection:
+        result = connection.execute(
+            text("""
+                SELECT 
+                    id,
+                    customer_name AS customer,
+                    amount,
+                    status
+                FROM loans
+                ORDER BY id
+            """)
+        )
+
+        loans = []
+
+        for row in result:
+            loans.append(dict(row._mapping))
+
+        return loans
+
 
 @router.get("/loan/{loan_id}")
 def get_loan(loan_id: int):
+    with engine.connect() as connection:
+        loan = connection.execute(
+            text("""
+                SELECT 
+                    id,
+                    customer_name AS customer,
+                    amount,
+                    status
+                FROM loans
+                WHERE id = :loan_id
+            """),
+            {"loan_id": loan_id}
+        ).fetchone()
 
-    for loan in loans:
-        if loan["id"] == loan_id:
-            return loan
+        if not loan:
+            raise HTTPException(
+                status_code=404,
+                detail="Loan not found"
+            )
 
-    raise HTTPException(
-        status_code=404,
-        detail="Loan not found"
-    )
+        return dict(loan._mapping)

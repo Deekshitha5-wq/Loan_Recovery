@@ -20,9 +20,9 @@ const menu = [
 
 export default function Sidebar({ setActivePage }) {
   return (
-    <div className="w-64 bg-[#111827] min-h-screen p-6 hidden md:block">
+    <div className="w-64 bg-white border-r border-gray-200 min-h-screen p-6 hidden md:block text-gray-800">
 
-      <h1 className="text-3xl font-bold mb-10 text-purple-400">
+      <h1 className="text-3xl font-bold mb-10 text-pink-500">
         LoanAI
       </h1>
 
@@ -33,7 +33,7 @@ export default function Sidebar({ setActivePage }) {
             onClick={() =>
               setActivePage(item.name.toLowerCase())
             }
-            className="flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-white/10 transition"
+            className="flex items-center gap-4 p-4 rounded-xl cursor-pointer text-gray-700 hover:bg-gray-100 transition"
           >
             <span className="text-xl">{item.icon}</span>
             <span>{item.name}</span>
