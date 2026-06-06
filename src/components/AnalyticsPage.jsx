@@ -22,7 +22,7 @@ export default function AnalyticsPage() {
 
       <div className="grid md:grid-cols-2 gap-6">
 
-        <div className="bg-[#1F2937] p-6 rounded-2xl">
+        <div className="bg-white border border-gray-200 shadow-md p-6 rounded-2xl">
           Monthly Recovery
 
           <h2 className="text-5xl font-bold mt-4">
@@ -30,7 +30,7 @@ export default function AnalyticsPage() {
           </h2>
         </div>
 
-        <div className="bg-[#1F2937] p-6 rounded-2xl">
+        <div className="bg-white border border-gray-200 shadow-md p-6 rounded-2xl">
           Recovered Loans
 
           <h2 className="text-5xl font-bold mt-4">

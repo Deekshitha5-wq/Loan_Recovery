@@ -8,13 +8,13 @@ export default function Navbar() {
           Welcome Back Agent 👋
         </h1>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-white/70 mt-1">
           Loan Recovery Dashboard
         </p>
       </div>
 
       <div className="flex items-center gap-6">
-        <div className="flex items-center bg-[#1F2937] px-4 py-2 rounded-xl">
+        <div className="flex items-center bg-white/10 px-4 py-2 rounded-xl">
           <FaSearch />
           <input
             className="bg-transparent outline-none ml-2"

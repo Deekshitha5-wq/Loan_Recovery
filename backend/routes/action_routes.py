@@ -49,6 +49,15 @@ def save_quick_action(data: QuickActionData):
                 status_code=404,
                 detail="Loan ID not found"
             )
+        if data.action_type=="Mark as Paid":
+            connection.execute(
+                text("""
+                    UPDATE loans
+                    SET status = 'paid'
+                    WHERE id = :loan_id
+                """),
+                {"loan_id": int(data.loan_id)}
+            )
         connection.execute(
             text("""
                 INSERT INTO quick_actions

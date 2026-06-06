@@ -4,14 +4,27 @@ import { getNotifications } from "../api";
 export default function Notifications() {
 
   const [notifications, setNotifications] = useState([]);
-
   useEffect(() => {
-    fetchNotifications();
+    const fetchData = async () => {
+      try {
+        const res = await fetch("http://127.0.0.1:8000/quick-actions");
+        const data = await res.json();
+        // filter reminders
+        const remainders = Array.isArray(data)
+          ? data.filter((item) => item.action_type === "Send Reminder")
+          : [];
+        setNotifications(remainders);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const fetchNotifications = async () => {
     const data = await getNotifications();
-    setNotifications(data);
+    setNotifications(Array.isArray(data) ? data : []);
   };
 
   return (
@@ -23,12 +36,12 @@ export default function Notifications() {
 
       <div className="space-y-4">
 
-        {notifications.map((item) => (
+        {notifications.map((n) => (
           <div
-            key={item.id}
+            key={n.id}
             className="bg-white shadow-md border border-gray-200 p-4 rounded-lg"
           >
-            {item.message}
+            {n.message}
           </div>
         ))}
 
