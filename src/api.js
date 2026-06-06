@@ -39,13 +39,11 @@ export async function saveQuickAction(action, loanId, note) {
   return res.json();
 }
 
-export async function sendVoiceMessage(customerMessage) {
+export async function sendVoiceMessage(data) {
   const res = await fetch(`${API_URL}/voice-message`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      customer_message: customerMessage,
-    }),
+    body: JSON.stringify(data),
   });
 
   return res.json();

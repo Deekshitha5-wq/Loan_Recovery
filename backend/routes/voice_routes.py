@@ -2,13 +2,15 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import text
 from database.connection import engine
-from services.twilio_service import start_real_call
 from voice_ai.call_flow import generate_response
 
 router = APIRouter()
 
 
 class VoiceMessageData(BaseModel):
+    customer_name: str
+    phone_number: str
+    loan_id: int
     customer_message: str
 
 
@@ -19,24 +21,60 @@ class EndCallData(BaseModel):
     transcript: list
 
 
-def generate_ai_reply(message: str):
-    msg = message.lower()
-
-    if "paid" in msg:
-        return "Thank you. We will verify your payment and update your loan status shortly."
-
-    if "tomorrow" in msg or "later" in msg or "week" in msg:
-        return "I understand. Please confirm the exact date you can make the payment."
-
-    if "problem" in msg or "issue" in msg or "job" in msg:
-        return "I understand your situation. I will mark this for recovery team follow-up."
-
-    return "This is regarding your pending loan payment. Could you please confirm when you can pay?"
-
-
 @router.post("/voice-message")
 def voice_message(data: VoiceMessageData):
-    ai_reply = generate_response(data.customer_message)
+
+    with engine.connect() as connection:
+
+        customer = connection.execute(
+            text("""
+                SELECT *
+                FROM customers
+                WHERE name = :customer_name
+                AND phone = :phone_number
+            """),
+            {
+                "customer_name": data.customer_name,
+                "phone_number": data.phone_number
+            }
+        ).fetchone()
+
+        if not customer:
+            raise HTTPException(
+                status_code=401,
+                detail="Customer not found"
+            )
+
+        loan = connection.execute(
+            text("""
+                SELECT *
+                FROM loans
+                WHERE id = :loan_id
+            """),
+            {
+                "loan_id": data.loan_id
+            }
+        ).fetchone()
+
+        if not loan:
+            raise HTTPException(
+                status_code=401,
+                detail="Loan not found"
+            )
+
+    prompt = f"""
+    Customer Name: {data.customer_name}
+    Phone Number: {data.phone_number}
+    Loan ID: {data.loan_id}
+
+    Customer says:
+    {data.customer_message}
+
+    You are a loan recovery agent.
+    Remember the customer's name and loan details throughout the conversation.
+    """
+
+    ai_reply = generate_response(prompt)
 
     return {
         "ai_reply": ai_reply
@@ -66,12 +104,11 @@ def end_call(data: EndCallData):
                 "phone_number": data.phone_number
             }
         ).fetchone()
-        print("Customer Found:", customer)
 
         if not customer:
             raise HTTPException(
                 status_code=401,
-                detail="Authentication failed: customer name and phone number do not match database records"
+                detail="Customer not found"
             )
 
         loan = connection.execute(
@@ -79,22 +116,17 @@ def end_call(data: EndCallData):
                 SELECT *
                 FROM loans
                 WHERE id = :loan_id
-                AND customer_name = :customer_name
             """),
             {
-                "loan_id": data.loan_id,
-                "customer_name": data.customer_name
+                "loan_id": data.loan_id
             }
         ).fetchone()
-        print("Loan Found:", loan)
 
         if not loan:
             raise HTTPException(
                 status_code=401,
-                detail="Authentication failed: loan ID does not match this customer"
+                detail="Loan not found"
             )
-
-        twilio_sid = start_real_call(data.phone_number)
 
         transcript_text = str(data.transcript)
 
@@ -105,35 +137,34 @@ def end_call(data: EndCallData):
                     customer_name,
                     phone_number,
                     loan_id,
-                    transcript,
-                    call_status,
-                    twilio_call_sid
+                    customer_message,
+                    ai_reply,
+                    call_status
                 )
                 VALUES
                 (
                     :customer_name,
                     :phone_number,
                     :loan_id,
-                    :transcript,
-                    :call_status,
-                    :twilio_call_sid
+                    :customer_message,
+                    :ai_reply,
+                    :call_status
                 )
             """),
             {
                 "customer_name": data.customer_name,
                 "phone_number": data.phone_number,
                 "loan_id": data.loan_id,
-                "transcript": transcript_text,
-                "call_status": "Call completed and saved",
-                "twilio_call_sid": twilio_sid
+                "customer_message": data.transcript[-1]["text"],
+                "ai_reply": "Conversation saved",
+                "call_status": "AI conversation completed and saved"
             }
         )
 
         connection.commit()
 
     return {
-        "message": "Call authenticated, Twilio call started, and history saved",
-        "twilio_call_sid": twilio_sid
+        "message": "Call saved successfully"
     }
 
 
@@ -141,11 +172,12 @@ def end_call(data: EndCallData):
 def get_call_logs():
 
     with engine.connect() as connection:
+
         result = connection.execute(
             text("""
                 SELECT *
                 FROM call_logs
-                ORDER BY call_started_at DESC
+                ORDER BY id DESC
             """)
         )
 
