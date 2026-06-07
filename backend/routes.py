@@ -16,7 +16,7 @@ from backend.services import (
     get_status_service,
 )
 
-from ai_engine.analytics_engine import generate_analytics
+from backend.ai_engine.analytics_engine import generate_analytics
 
 
 router = APIRouter()
@@ -89,7 +89,7 @@ def get_status():
 # AI Analytics Integration
 # -----------------------------
 
-@router.get("/analytics")
+@router.get("/ai-analytics")
 def analytics():
     try:
         return generate_analytics()

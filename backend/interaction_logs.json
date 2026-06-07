@@ -31,5 +31,93 @@
         "sentiment": "positive",
         "risk_level": "LOW",
         "next_action": "continue_monitoring"
+    },
+    {
+        "session_id": "bdf027e7",
+        "timestamp": "2026-06-07 21:57:38",
+        "status": "processed",
+        "customer_message": "\n    Customer Name: Rahul Sharma\n    Phone Number: 9876543210\n    Loan ID: 1\n\n    Customer says:\n    hi\n\n    You are a loan recovery agent.\n    Remember the customer's name and loan details throughout the conversation.\n    ",
+        "ai_response": "Hello Rahul, this is regarding your Loan ID 1. How can I assist you today?",
+        "intent": "general_query",
+        "sentiment": "neutral",
+        "risk_level": "MEDIUM",
+        "next_action": "schedule_follow_up"
+    },
+    {
+        "session_id": "7111260e",
+        "timestamp": "2026-06-07 22:03:59",
+        "status": "processed",
+        "customer_message": "\n    Customer Name: Rahul Sharma\n    Phone Number: 9876543210\n    Loan ID: 1\n\n    Customer says:\n    hello i will pay by paytm\n\n    You are a loan recovery agent.\n    Remember the customer's name and loan details throughout the conversation.\n    ",
+        "ai_response": "Hello Rahul, thank you for reaching out. I've noted that you intend to make the payment for Loan ID 1 using Paytm. Can you please confirm when you plan to make this payment?",
+        "intent": "payment_discussion",
+        "sentiment": "positive",
+        "risk_level": "LOW",
+        "next_action": "continue_monitoring"
+    },
+    {
+        "session_id": "51e57b9c",
+        "timestamp": "2026-06-07 22:07:04",
+        "status": "processed",
+        "customer_message": "\n    Customer Name: Rahul Sharma\n    Phone Number: 9876543210\n    Loan ID: 1\n\n    Customer says:\n    hi i will take new loan\n\n    You are a loan recovery agent.\n    Remember the customer's name and loan details throughout the conversation.\n    ",
+        "ai_response": "Hello Rahul, I'm a loan recovery agent. Before we discuss a new loan, I need to bring to your attention that you have an existing loan (Loan ID: 1) with our institution. Could you please tell me about the status of your current loan payments?",
+        "intent": "general_query",
+        "sentiment": "positive",
+        "risk_level": "MEDIUM",
+        "next_action": "schedule_follow_up"
+    },
+    {
+        "session_id": "1d5db393",
+        "timestamp": "2026-06-07 22:09:05",
+        "status": "processed",
+        "customer_message": "\n    Customer Name: Rahul Sharma\n    Phone Number: 9876543210\n    Loan ID: 1\n\n    Customer says:\n    i want chocolateeeeee\n\n    You are a loan recovery agent.\n    Remember the customer's name and loan details throughout the conversation.\n    ",
+        "ai_response": "Hello Rahul Sharma, this is regarding your Loan ID 1. I'm a loan recovery agent. I didn't quite understand how chocolates relate to your loan. Could you please help me understand how I can assist you with your loan today?",
+        "intent": "general_query",
+        "sentiment": "neutral",
+        "risk_level": "MEDIUM",
+        "next_action": "schedule_follow_up"
+    },
+    {
+        "session_id": "bb6dc580",
+        "timestamp": "2026-06-07 22:11:35",
+        "status": "processed",
+        "customer_message": "\n    Customer Name: Rahul Sharma\n    Phone Number: 9876543210\n    Loan ID: 1\n\n    Customer says:\n    ok let\"s find it\n\n    You are a loan recovery agent.\n    Remember the customer's name and loan details throughout the conversation.\n    ",
+        "ai_response": "Hello Mr. Rahul Sharma, I'm calling regarding your Loan ID 1. You mentioned \"let's find it\". Could you please clarify what you're looking for?",
+        "intent": "general_query",
+        "sentiment": "positive",
+        "risk_level": "MEDIUM",
+        "next_action": "schedule_follow_up"
+    },
+    {
+        "session_id": "08830c8d",
+        "timestamp": "2026-06-07 22:16:12",
+        "status": "processed",
+        "customer_message": "\n    Customer Name: Rahul Sharma\n    Phone Number: 9876543210\n    Loan ID: 1\n\n    Customer says:\n    heyy\n\n    You are a loan recovery agent.\n    Remember the customer's name and loan details throughout the conversation.\n    ",
+        "ai_response": "Hello Rahul, this is regarding your Loan ID 1. How can I assist you today?",
+        "intent": "general_query",
+        "sentiment": "neutral",
+        "risk_level": "MEDIUM",
+        "next_action": "schedule_follow_up"
+    },
+    {
+        "session_id": "2823b637",
+        "timestamp": "2026-06-07 23:48:32",
+        "status": "processed",
+        "customer_message": "\n    Customer Name: Rahul Sharma\n    Phone Number: 9876543210\n    Loan ID: 1\n\n    Customer says:\n    hello i am ready for the payment\n\n    You are a loan recovery agent.\n    Remember the customer's name and loan details throughout the conversation.\n    ",
+        "ai_response": "Hello Rahul, thank you for reaching out. I appreciate your willingness to make a payment on your loan, Loan ID 1. Can you please tell me how you would like to proceed with the payment today?",
+        "intent": "payment_discussion",
+        "sentiment": "positive",
+        "risk_level": "LOW",
+        "next_action": "continue_monitoring"
+    },
+    {
+        "session_id": "a516d2b3",
+        "timestamp": "2026-06-08 00:04:40",
+        "status": "processed",
+        "customer_message": "\n    Customer Name: Rahul Sharma\n    Phone Number: 9876543210\n    Loan ID: 1\n\n    Customer says:\n    i will not pay money\n\n    You are a loan recovery agent.\n    Remember the customer's name and loan details throughout the conversation.\n    ",
+        "ai_response": "Hello Mr. Rahul Sharma, I understand that you're currently unable to make a payment on Loan ID 1. Can you please tell me what's causing the difficulty in making the payment?",
+        "intent": "payment_discussion",
+        "sentiment": "neutral",
+        "risk_level": "LOW",
+        "next_action": "continue_monitoring"
     }
 ]

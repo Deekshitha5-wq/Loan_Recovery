@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from sqlalchemy import text
 from database.connection import engine
 from voice_ai.call_flow import generate_response
+from ai_engine.analytics_engine import generate_analytics, update_analytics
 
 router = APIRouter()
 
@@ -75,6 +76,10 @@ def voice_message(data: VoiceMessageData):
     """
 
     ai_reply = generate_response(prompt)
+    print("before update")
+    update_analytics("payment_discussion","low")
+    print(generate_analytics())
+    print("after update")
 
     return {
         "ai_reply": ai_reply
