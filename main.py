@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from voice_ai.voice_routes import router as voice_router
+from backend.voice_ai.voice_routes import router as voice_router
 from backend.routes import router as backend_router
 
 app = FastAPI()

@@ -1,6 +1,7 @@
 from groq import Groq
 from dotenv import load_dotenv
 import os
+from ai_engine.response_formatter import generate_complete_analysis
 
 load_dotenv()
 
@@ -23,6 +24,8 @@ conversation_history = [
     }
 ]
 def generate_response(user_text):
+    generate_complete_analysis(user_text)
+    print("Analytics Updated")
 
     conversation_history.append({
         "role": "user",

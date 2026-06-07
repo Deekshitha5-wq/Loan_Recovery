@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from voice_ai.speech_to_text import convert_speech_to_text
-from voice_ai.call_flow import generate_response
+from backend.voice_ai.speech_to_text import convert_speech_to_text
+from backend.voice_ai.call_flow import generate_response
 
 router = APIRouter()
 
