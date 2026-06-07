@@ -42,7 +42,7 @@ def update_analytics(intent, risk_level):
 
 
     # Intent tracking
-    if intent == "payment_discussion":
+    if intent == "payment_status_update":
 
         analytics_data["payment_discussions"] += 1
 
@@ -85,10 +85,13 @@ def generate_analytics():
             recovery_rate = round((recovered_loans / total_loans) * 100)
 
         return {
-            "totalLoans": total_loans,
-            "pendingLoans": pending_loans,
-            "recoveredLoans": recovered_loans,
-            "recoveryRate": recovery_rate
+            "total_interactions": analytics_data["total_interactions"],
+            "high_risk_cases": analytics_data["high_risk_cases"],
+            "medium_risk_cases": analytics_data["medium_risk_cases"],
+            "low_risk_cases": analytics_data["low_risk_cases"],
+            "payment_discussions": analytics_data["payment_discussions"],
+            "follow_up_requests": analytics_data["follow_up_requests"],
+            "financial_difficulty_cases": analytics_data["financial_difficulty_cases"]
         }
 
 

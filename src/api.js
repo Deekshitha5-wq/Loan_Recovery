@@ -11,7 +11,7 @@ export async function getLoans() {
 }
 
 export async function getAnalytics() {
-  const res = await fetch(`${API_URL}/analytics`);
+  const res = await fetch(`${API_URL}/ai-analytics`);
   return res.json();
 }
 
@@ -74,5 +74,10 @@ export async function loginUser(email, password) {
     }),
   });
 
+  return res.json();
+}
+
+export async function getCallAnalytics() {
+  const res = await fetch(`${API_URL}/call-analytics`);
   return res.json();
 }

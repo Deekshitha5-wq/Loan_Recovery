@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAnalytics } from "../api";
+import { getCallAnalytics } from "../api";
 
 export default function AnalyticsPage() {
 
@@ -10,7 +10,7 @@ export default function AnalyticsPage() {
   }, []);
 
   const fetchAnalytics = async () => {
-    const data = await getAnalytics();
+    const data = await getCallAnalytics();
     setAnalytics(data);
   };
 
