@@ -1,3 +1,5 @@
+from database.connection import engine
+from sqlalchemy import text
 analytics_data = {
 
     "total_interactions": 0,
@@ -61,27 +63,33 @@ def get_analytics():
     return analytics_data
 
 
-
 def generate_analytics():
 
-    data = get_analytics()
+    with engine.connect() as connection:
 
-    return {
+        total_loans = connection.execute(
+            text("SELECT COUNT(*) FROM loans")
+        ).scalar()
 
-        "total_interactions": data["total_interactions"],
+        pending_loans = connection.execute(
+            text("SELECT COUNT(*) FROM loans WHERE status = 'pending'")
+        ).scalar()
 
-        "high_risk_cases": data["high_risk_cases"],
+        recovered_loans = connection.execute(
+            text("SELECT COUNT(*) FROM loans WHERE status = 'paid'")
+        ).scalar()
 
-        "medium_risk_cases": data["medium_risk_cases"],
+        recovery_rate = 0
 
-        "low_risk_cases": data["low_risk_cases"],
+        if total_loans > 0:
+            recovery_rate = round((recovered_loans / total_loans) * 100)
 
-        "payment_discussions": data["payment_discussions"],
-
-        "follow_up_requests": data["follow_up_requests"],
-
-        "financial_difficulty_cases": data["financial_difficulty_cases"]
-    }
+        return {
+            "totalLoans": total_loans,
+            "pendingLoans": pending_loans,
+            "recoveredLoans": recovered_loans,
+            "recoveryRate": recovery_rate
+        }
 
 
 

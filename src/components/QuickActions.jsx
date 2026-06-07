@@ -21,19 +21,28 @@ export default function QuickActions() {
   }, []);
 
   const handleAction = async (action) => {
-    const data = await saveQuickAction(
-      action,
-      loanId,
-      note
+
+  if (action === "Generate Report") {
+    window.open(
+      `http://127.0.0.1:8000/generate-report/${loanId}`,
+      "_blank"
     );
+    return;
+  }
 
-    alert(data.message);
+  const data = await saveQuickAction(
+    action,
+    loanId,
+    note
+  );
 
-    setLoanId("");
-    setNote("");
+  alert(data.message);
 
-    fetchHistory();
-  };
+  setLoanId("");
+  setNote("");
+
+  fetchHistory();
+};
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-200">

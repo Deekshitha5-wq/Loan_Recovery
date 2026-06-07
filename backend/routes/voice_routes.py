@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import text
-from backend.database.connection import engine
-from backend.voice_ai.call_flow import generate_response
+from database.connection import engine
+from voice_ai.call_flow import generate_response
 
 router = APIRouter()
 

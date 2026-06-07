@@ -10,10 +10,12 @@ export default function Notifications() {
         const res = await fetch("http://127.0.0.1:8000/quick-actions");
         const data = await res.json();
         // filter reminders
-        const remainders = Array.isArray(data)
-          ? data.filter((item) => item.action_type === "Send Reminder")
-          : [];
-        setNotifications(remainders);
+
+const notifications = Array.isArray(data)
+  ? data
+  : [];
+
+setNotifications(notifications);
       } catch (error) {
         console.log(error);
       }
@@ -34,18 +36,32 @@ export default function Notifications() {
         Notifications
       </h1>
 
-      <div className="space-y-4">
+      , <div className="space-y-4">
+  {notifications.map((item) => (
+    <div
+      key={item.id}
+      className="bg-white shadow-md border border-gray-200 p-4 rounded-lg"
+    >
+      <h3 className="font-bold text-lg">
+        {item.action_type}
+      </h3>
 
-        {notifications.map((n) => (
-          <div
-            key={n.id}
-            className="bg-white shadow-md border border-gray-200 p-4 rounded-lg"
-          >
-            {n.message}
-          </div>
-        ))}
+      <p className="text-gray-600">
+        {item.status}
+      </p>
 
-      </div>
+      <p className="text-sm text-gray-500">
+        Loan ID: {item.loan_id}
+      </p>
+
+      {item.note && (
+        <p className="text-sm text-blue-600">
+          Note: {item.note}
+        </p>
+      )}
+    </div>
+  ))}
+</div>
     </div>
   );
 }
