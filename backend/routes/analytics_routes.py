@@ -1,14 +1,8 @@
 from fastapi import APIRouter
+from ai_engine.analytics_engine import generate_analytics
 
 router = APIRouter()
 
-
 @router.get("/analytics")
 def get_analytics():
-
-    return {
-        "total_loans": 1250,
-        "pending_loans": 320,
-        "recovered_loans": 930,
-        "recovery_rate": "74%"
-    }
+    return generate_analytics()
