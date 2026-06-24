@@ -4,7 +4,7 @@ export default function OverviewCards() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/analytics")
+    fetch("http://127.0.0.1:8000/loan-analytics")
       .then((res) => res.json())
       .then((stats) => {
         setData([
@@ -25,6 +25,7 @@ export default function OverviewCards() {
             value: `${stats.recoveryRate}%`,
           },
         ]);
+        console.log(stats);
       });
   }, []);
 

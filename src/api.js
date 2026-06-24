@@ -78,6 +78,6 @@ export async function loginUser(email, password) {
 }
 
 export async function getCallAnalytics() {
-  const res = await fetch(`${API_URL}/call-analytics`);
+  const res = await fetch(`${API_URL}/analytics`);
   return res.json();
 }
